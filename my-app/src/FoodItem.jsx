@@ -10,7 +10,10 @@ export default function FoodItem(props) {
 
   return (
        <div>
-          <div onClick={additionalDetToTrue}>{foodItem.description}</div>
+          <div onClick={additionalDetToTrue}>{foodItem.description}  </div>
+          <div>Brand: {foodItem.brandOwner}</div>
+          <div>Additional descriptions: {foodItem.additionalDescriptions? foodItem.additionalDescriptions : 'None'}</div>
+
           <button>Add to cart</button>
           <div>{additionalDetails ?
             <div>
