@@ -12,8 +12,8 @@ export default function FoodList(props) {
   useEffect(() => {
     axios.get(`https://api.nal.usda.gov/fdc/v1/foods/search?query=${searchItem}&pageSize=10&api_key=${API_KEY}`)
     .then(response => {
-      setFoodList(response.data);
-      console.log('response', response.data)
+      setFoodList(response.data.foods);
+      console.log('response', response.data.foods)
     })
     .catch(err => console.error(err))
   },[searchItem])
