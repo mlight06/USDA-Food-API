@@ -4,19 +4,19 @@ import { API_KEY } from "./config";
 
 export default function FoodList(props) {
   const {searchItem} = props;
-  const {foodList} = props;
-  // const [foodList, setFoodList] = useState([]);
+  // const {foodList} = props;
+  const [foodList, setFoodList] = useState([]);
   const [additionalDetails, setAdditionalDetails] = useState(false);
-  console.log('searchITEM', searchItem)
+  console.log('searchItem', searchItem,'foodList', foodList)
 
-  // useEffect(() => {
-  //   axios.get(`https://api.nal.usda.gov/fdc/v1/foods/search?query=${searchItem}&nutrients=203&nutrients=204&nutrients=205&nutrients=208&api_key=${API_KEY}`)
-  //   .then(response => {
-  //     setFoodList(response.data);
-  //     console.log('response', response.data)
-  //   })
-  //   .catch(err => console.error(err))
-  // },[])
+  useEffect(() => {
+    axios.get(`https://api.nal.usda.gov/fdc/v1/foods/search?query=${searchItem}&pageSize=10&api_key=${API_KEY}`)
+    .then(response => {
+      setFoodList(response.data);
+      console.log('response', response.data)
+    })
+    .catch(err => console.error(err))
+  },[searchItem])
 
   function additionalDetToTrue() {
     setAdditionalDetails(true);

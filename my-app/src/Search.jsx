@@ -5,17 +5,17 @@ import { API_KEY } from "./config";
 
 export default function Search() {
   const [searchItem, setSearchItem] = useState('');
-  const [foodList, setFoodList] = useState([]);
-  console.log('searchItem', searchItem)
+  // const [foodList, setFoodList] = useState([]);
+  // console.log('searchItem', searchItem)
 
-function search() {
-  console.log('made it to search')
-  axios.get(`https://api.nal.usda.gov/fdc/v1/foods/search?query=${searchItem}&api_key=${API_KEY}`)
-  .then(response => {
-    setFoodList(response.data);
-    console.log('response', response.data)
-  })
-  .catch(err => console.error(err))
+function searchFood() {
+  // console.log('made it to search')
+  // axios.get(`https://api.nal.usda.gov/fdc/v1/foods/search?query=${searchItem}&api_key=${API_KEY}`)
+  // .then(response => {
+  //   setFoodList(response.data);
+  //   console.log('response', response.data)
+  // })
+  // .catch(err => console.error(err))
 }
   return (
     <div>
@@ -30,9 +30,9 @@ function search() {
             name="s"
             onInput={e => setSearchItem(e.target.value)}
         />
-        <button type="submit" onClick={search}>Search</button>
+        <button type="submit" onClick={searchFood}>Search</button>
     </form>
-    <FoodList searchItem={searchItem} foodList={foodList}/>
+    <FoodList searchItem={searchItem}/>
     </div>
   )
 }
