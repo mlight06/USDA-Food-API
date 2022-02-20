@@ -11,6 +11,7 @@ export default function FoodItem(props) {
   const [protein, setProtein] = useState(0);
   const [sugar, setSugar] = useState(0);
   const [fat, setFat] = useState(0);
+  const [fetchingData, setFetchingData] = useState(false);
   const [carboyhydrate, setCarboyhydrate] = useState(0);
 
 
@@ -20,7 +21,7 @@ export default function FoodItem(props) {
     setAdditionalDetails(!additionalDetails);
     axios.get(`https://api.nal.usda.gov/fdc/v1/food/${fdcId}?nutrients=203&nutrients=204&nutrients=205&nutrients=208&nutrients=269&api_key=${API_KEY}`)
     .then(response => {
-      let nutrientList = response.data.foodNutrients;
+      const nutrientList = response.data.foodNutrients;
       console.log('calories', nutrientList[0].amount)
       setCalories(nutrientList[0].amount);
       setProtein(nutrientList[1].amount);
@@ -28,14 +29,17 @@ export default function FoodItem(props) {
       setCarboyhydrate(nutrientList[3].amount);
       setSugar(nutrientList[4].amount)
       console.log('FOODITEMresponse', response.data.foodNutrients)
-      console.log('nutrients', calories, protein, fat, carboyhydrate, sugar)
+      setFetchingData(true);
 
     })
     .catch(err => console.error(err))
   }
 
   function addToCart() {
-
+    const cartObject = {description, calories, protein, fat, carboyhydrate, sugar}
+      axios.post('/api/cart', cartObject)
+      .then(response => alert('Added to cart!'))
+      .catch(err => console.error(err))
   }
 
   return (
@@ -44,11 +48,17 @@ export default function FoodItem(props) {
           <div>Brand: {foodItem.brandOwner}</div>
           <div>Additional descriptions: {foodItem.additionalDescriptions? foodItem.additionalDescriptions : 'None'}</div>
 
-          <button>Add to cart</button>
+          <button onClick={addToCart}>Add to cart</button>
           <div>{additionalDetails ?
+                fetchingData ?
             <div>
-             <div>{foodItem.foodNutrients[0].nutrientName}</div>
+             <div>Calories: {calories}</div>
+             <div>Protein: {protein}</div>
+             <div>Carboydrates: {carboyhydrate}</div>
+             <div>Fats: {fat}</div>
+             <div>Sugars: {sugar}</div>
             </div>
+            : <div>Please wait, fetching data</div>
           : null}
           </div>
         </div>

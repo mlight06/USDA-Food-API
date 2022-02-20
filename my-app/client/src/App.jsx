@@ -1,4 +1,3 @@
-import './App.css';
 import React, {useEffect} from 'react';
 import axios from 'axios';
 import { API_KEY } from './config';

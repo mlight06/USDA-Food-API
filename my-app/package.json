@@ -8,14 +8,17 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.0",
     "express": "^4.17.3",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "webpack": "^5.69.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "nodemon backend/server/index.js",
+    "build": "webpack --config ./webpack.config.js -w",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -36,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.9.2"
   }
 }
