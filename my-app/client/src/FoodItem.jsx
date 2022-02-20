@@ -12,7 +12,7 @@ export default function FoodItem(props) {
   const [sugar, setSugar] = useState(0);
   const [fat, setFat] = useState(0);
   const [fetchingData, setFetchingData] = useState(false);
-  const [carboyhydrate, setCarboyhydrate] = useState(0);
+  const [carbohydrate, setCarbohydrate] = useState(0);
 
 
   console.log('fdcId', fdcId)
@@ -26,7 +26,7 @@ export default function FoodItem(props) {
       setCalories(nutrientList[0].amount);
       setProtein(nutrientList[1].amount);
       setFat(nutrientList[2].amount);
-      setCarboyhydrate(nutrientList[3].amount);
+      setCarbohydrate(nutrientList[3].amount);
       setSugar(nutrientList[4].amount)
       console.log('FOODITEMresponse', response.data.foodNutrients)
       setFetchingData(true);
@@ -36,7 +36,8 @@ export default function FoodItem(props) {
   }
 
   function addToCart() {
-    const cartObject = {description, calories, protein, fat, carboyhydrate, sugar}
+    const cartObject = {description, calories, protein, fat, carbohydrate, sugar}
+    console.log('addtocart', cartObject)
       axios.post('/api/cart', cartObject)
       .then(response => alert('Added to cart!'))
       .catch(err => console.error(err))
@@ -54,7 +55,7 @@ export default function FoodItem(props) {
             <div>
              <div>Calories: {calories}</div>
              <div>Protein: {protein}</div>
-             <div>Carboydrates: {carboyhydrate}</div>
+             <div>Carbohydrates: {carbohydrate}</div>
              <div>Fats: {fat}</div>
              <div>Sugars: {sugar}</div>
             </div>

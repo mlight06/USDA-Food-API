@@ -5,13 +5,14 @@ CREATE DATABASE usda;
 \c usda;
 
 CREATE TABLE cart (
-  id BIGSERIAL PRIMARY KEY,
+  id BIGSERIAL,
   description VARCHAR,
-  calories INTEGER,
-  protein INTEGER,
-  fat INTEGER,
-  carbohydrate INTEGER,
-  sugar INTEGER
+  calories DECIMAL,
+  protein DECIMAL,
+  fat DECIMAL,
+  carbohydrate DECIMAL,
+  sugar DECIMAL,
+  PRIMARY KEY (id)
 );
 
 -- Command for executing this file into your local psql
