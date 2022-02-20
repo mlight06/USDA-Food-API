@@ -11,5 +11,11 @@ module.exports ={
     .catch(err => console.error(err))
 
 
+  },
+
+  getCart: (req, res) => {
+    pool.query('SELECT * from cart')
+    .then(response => res.send(response.rows))
+    .catch(err => console.error(err))
   }
 }

@@ -1,10 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, forceUpdate} from "react";
 import axios from "axios";
 import { API_KEY } from "./config";
+import Cart from "./Cart";
 
 export default function FoodItem(props) {
   const [additionalDetails, setAdditionalDetails] = useState(false);
   const {foodItem} = props;
+  const {setCartList} = props;
   const fdcId = foodItem.fdcId;
   const description = foodItem.description;
   const [calories, setCalories] = useState(0);
@@ -13,6 +15,7 @@ export default function FoodItem(props) {
   const [fat, setFat] = useState(0);
   const [fetchingData, setFetchingData] = useState(false);
   const [carbohydrate, setCarbohydrate] = useState(0);
+
 
 
   console.log('fdcId', fdcId)
@@ -37,9 +40,13 @@ export default function FoodItem(props) {
 
   function addToCart() {
     const cartObject = {description, calories, protein, fat, carbohydrate, sugar}
-    console.log('addtocart', cartObject)
       axios.post('/api/cart', cartObject)
-      .then(response => alert('Added to cart!'))
+      .then(response => {
+        axios.get('/api/cart')
+        .then(response => setCartList(response.data))
+        .catch(err => console.error(err))
+      }
+        )
       .catch(err => console.error(err))
   }
 

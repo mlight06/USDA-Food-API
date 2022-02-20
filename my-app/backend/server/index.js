@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname, '../../client/public')));
 app.use(express.json());
 
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../../client/public/index.html'))
 });
 
