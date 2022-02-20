@@ -1,11 +1,18 @@
-drop database if exists usda;
+DROP DATABASE IF EXISTS usda;
 
-create database usda;
+CREATE DATABASE usda;
 
 \c usda;
 
-create table cart (
-  id BIGSERIAL,
+CREATE TABLE cart (
+  id BIGSERIAL PRIMARY KEY,
+  description VARCHAR,
+  calories INTEGER,
+  protein INTEGER,
+  fat INTEGER,
+  carbohydrate INTEGER,
+  sugar INTEGER
+);
 
-
-)
+-- Command for executing this file into your local psql
+-- psql -h localhost -d postgres -U [your username] -f ./my-app/backend/schema.SQL

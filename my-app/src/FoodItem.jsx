@@ -5,7 +5,8 @@ import { API_KEY } from "./config";
 export default function FoodItem(props) {
   const [additionalDetails, setAdditionalDetails] = useState(false);
   const {foodItem} = props;
-  const fdcId = foodItem.fdcId
+  const fdcId = foodItem.fdcId;
+  const description = foodItem.description;
   const [calories, setCalories] = useState(0);
   const [protein, setProtein] = useState(0);
   const [sugar, setSugar] = useState(0);
@@ -39,7 +40,7 @@ export default function FoodItem(props) {
 
   return (
        <div>
-          <div onClick={additionalDetToTrue}>{foodItem.description}  </div>
+          <div onClick={additionalDetToTrue}>{description}</div>
           <div>Brand: {foodItem.brandOwner}</div>
           <div>Additional descriptions: {foodItem.additionalDescriptions? foodItem.additionalDescriptions : 'None'}</div>
 
