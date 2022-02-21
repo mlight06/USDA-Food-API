@@ -24,5 +24,11 @@ module.exports ={
       pool.query('DELETE from cart where description = $1', [req.params.description])
       .then(response => res.sendStatus(200))
       .catch(err => console.error(err))
+  },
+
+  calculateCalories: (req,res) => {
+    pool.query('SELECT SUM (calories) from cart')
+    .then(response => res.send(response))
+    .catch(err => {console.error(err)})
   }
 }

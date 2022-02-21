@@ -1,7 +1,6 @@
 import React, {useState, useEffect, forceUpdate} from "react";
 import axios from "axios";
 import { API_KEY } from "./config";
-import Cart from "./Cart";
 
 export default function FoodItem(props) {
   const [additionalDetails, setAdditionalDetails] = useState(false);
@@ -16,27 +15,21 @@ export default function FoodItem(props) {
   const [fetchingData, setFetchingData] = useState(false);
   const [carbohydrate, setCarbohydrate] = useState(0);
 
-
-
-  console.log('fdcId', fdcId)
-  // Will hit API with fdcID, returning nutritional value for item
-  function additionalDetToTrue() {
-    setAdditionalDetails(!additionalDetails);
+   // Will hit API with fdcID, returning nutritional value for item
+  useEffect(() => {
     axios.get(`https://api.nal.usda.gov/fdc/v1/food/${fdcId}?nutrients=203&nutrients=204&nutrients=205&nutrients=208&nutrients=269&api_key=${API_KEY}`)
     .then(response => {
       const nutrientList = response.data.foodNutrients;
-      console.log('calories', nutrientList[0].amount)
       setCalories(nutrientList[0].amount);
       setProtein(nutrientList[1].amount);
       setFat(nutrientList[2].amount);
       setCarbohydrate(nutrientList[3].amount);
       setSugar(nutrientList[4].amount)
-      console.log('FOODITEMresponse', response.data.foodNutrients)
       setFetchingData(true);
-
     })
-    .catch(err => console.error(err))
-  }
+    .catch(err => console.error(err ))
+
+  }, [fdcId]);
 
   function addToCart() {
     const cartObject = {description, calories, protein, fat, carbohydrate, sugar}
@@ -50,9 +43,13 @@ export default function FoodItem(props) {
       .catch(err => console.error(err))
   }
 
+  function showAdditionalDetails() {
+    setAdditionalDetails(!additionalDetails)}
+
+
   return (
        <div>
-          <div onClick={additionalDetToTrue}>{description}</div>
+          <div onClick={showAdditionalDetails}>{description}</div>
           <div>Brand: {foodItem.brandOwner}</div>
           <div>Additional descriptions: {foodItem.additionalDescriptions? foodItem.additionalDescriptions : 'None'}</div>
 
