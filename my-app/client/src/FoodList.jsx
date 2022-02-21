@@ -21,7 +21,7 @@ export default function FoodList(props) {
 
   return (
     <div>
-      <Cart cartList={cartList}/>
+      <Cart cartList={cartList} setCartList={setCartList}/>
 
     <div>
       {foodList.length > 0 ? foodList.map((foodItem) => (

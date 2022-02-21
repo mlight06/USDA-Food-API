@@ -3,19 +3,23 @@ import axios from "axios";
 
 export default function Cart(props) {
   const {cartList} = props;
+  const {setCartList} = props;
   const [deletedItem, setDeletedItem] =useState('');
 
-  useEffect(() => {
-    axios.get('/api/cart')
-    .then(response => cartList = [...cartList, response.data])
-    .catch(err => console.error(err))
-  }, []
+  // useEffect(() => {
+  //   axios.get('/api/cart')
+  //   .then(response => cartList = [...cartList, response.data])
+  //   .catch(err => console.error(err))
+  // }, []
 
-  )
+  // )
   function removeFromCart(e) {
     const description = e.target.value;
     axios.delete(`/api/cart/${description}`)
     .then(response => {
+      axios.get('/api/cart')
+      .then(response => setCartList(response.data))
+    . catch(err => console.error(err))
       alert('removed')
     })
     .catch(err => console.error(err))
