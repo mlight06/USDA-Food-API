@@ -17,5 +17,12 @@ module.exports ={
     pool.query('SELECT * from cart')
     .then(response => res.send(response.rows))
     .catch(err => console.error(err))
+  },
+
+  deleteItem: (req, res) => {
+      console.log('reqparams', req.params)
+      pool.query('DELETE from cart where description = $1', [req.params.description])
+      .then(response => res.sendStatus(200))
+      .catch(err => console.error(err))
   }
 }

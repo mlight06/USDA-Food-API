@@ -3,16 +3,22 @@ import axios from "axios";
 
 export default function Cart(props) {
   const {cartList} = props;
+  const [deletedItem, setDeletedItem] =useState('');
 
-  // useEffect(() => {
-  //   axios.get('/api/cart')
-  //   .then(response => setCartItems(response.data))
-  //   .catch(err => console.error(err))
-  // }, []
+  useEffect(() => {
+    axios.get('/api/cart')
+    .then(response => cartList = [...cartList, response.data])
+    .catch(err => console.error(err))
+  }, []
 
-  // )
-  function removeFromCart() {
-    console.log('removed')
+  )
+  function removeFromCart(e) {
+    const description = e.target.value;
+    axios.delete(`/api/cart/${description}`)
+    .then(response => {
+      alert('removed')
+    })
+    .catch(err => console.error(err))
   }
 
   return (
@@ -22,7 +28,7 @@ export default function Cart(props) {
       (
         <div>
           <div>{item.description}</div>
-          <button onClick={removeFromCart}>X</button>
+          <button value={item.description} onClick={e => removeFromCart(e)}>X</button>
         </div>
       )
       )

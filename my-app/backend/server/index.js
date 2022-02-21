@@ -2,7 +2,7 @@
 const express = require('express');
 const path = require('path');
 const router = require('../routes')
-
+const pool = require('../db')
 
 const app = express();
 app.use(express.static(path.join(__dirname, '../../client/public')));
@@ -12,7 +12,6 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../../client/public/index.html'))
 });
-
 
 app.use('/api', router);
 
