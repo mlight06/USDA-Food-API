@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from "react";
 import FoodList from "./FoodList";
+import { Container, TextField } from "@mui/material";
 
 export default function Search() {
   const [searchItem, setSearchItem] = useState('');
 
   return (
-    <div>
+    <Container sx={{maxWidth: 700}}>
         <form >
         <label >
-            <span>Search food items</span>
+            <Container sx={{maxWidth: 400 }}>Search food items</Container>
         </label>
-        <input
+        <TextField
+            sx={{maxWidth: 700, maxHeight: 100}}
             type="text"
             id="header-search"
             placeholder="Search food item"
@@ -18,8 +20,8 @@ export default function Search() {
             onInput={e => setSearchItem(e.target.value)}
         />
         {/* <button type="submit" onClick={searchFood}>Search</button> */}
-    </form>
-    <FoodList searchItem={searchItem}/>
-    </div>
+        </form>
+      <FoodList searchItem={searchItem}/>
+    </Container>
   )
 }

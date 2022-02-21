@@ -24,8 +24,7 @@ export default function Cart(props) {
     .then(response => {
       axios.get('/api/cart')
       .then(response => setCartList(response.data))
-    . catch(err => console.error(err))
-      alert('removed')
+      .catch(err => console.error(err))
     })
     .catch(err => console.error(err))
   }
@@ -44,7 +43,7 @@ export default function Cart(props) {
       <div>
       {cartList.length > 0 ? cartList.map((item) =>
       (
-        <TableContainer sx={{ maxHeight: 200 }}>
+        <TableContainer sx={{ maxHeight: 200, maxWidth: 400, alignItems: "center" }}>
           <Table>
             <TableBody>
               <TableRow>

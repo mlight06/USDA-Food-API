@@ -50,8 +50,8 @@ export default function FoodItem(props) {
 
   return (
        <div>
-          <div onClick={showAdditionalDetails}>{description}</div>
-          <div>Brand: {foodItem.brandOwner}</div>
+          <div className="itemDescription" onClick={showAdditionalDetails}>{description}</div>
+          {/* <div>Brand: {foodItem.brandOwner}</div> */}
           <div>Additional descriptions: {foodItem.additionalDescriptions? foodItem.additionalDescriptions : 'None'}</div>
           <div>{additionalDetails ?
                 fetchingData ?

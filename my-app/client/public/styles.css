@@ -1,0 +1,7 @@
+.itemDescription {
+  font-size: large;
+  color: blue;
+}
+.itemDescription:hover {
+  color: green;
+}

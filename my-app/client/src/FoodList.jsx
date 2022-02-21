@@ -3,7 +3,7 @@ import axios from 'axios';
 import { API_KEY } from "./config";
 import FoodItem from "./FoodItem";
 import Cart from "./Cart";
-import {Table, TableBody, TableRow, TableCell, TableContainer} from "@mui/material";
+import {Table, TableBody, TableRow, TableCell, TableContainer, Container} from "@mui/material";
 
 export default function FoodList(props) {
   const {searchItem} = props;
@@ -19,25 +19,17 @@ export default function FoodList(props) {
   },[searchItem])
 
   return (
-    <div>
+    <Container sx={{maxWidth: 700}}>
       <Cart cartList={cartList} setCartList={setCartList}/>
+      <Container sx={{maxWidth: 700}}>
+        {foodList.length > 0 ? foodList.map((foodItem) => (
 
-    <div>
-      {foodList.length > 0 ? foodList.map((foodItem) => (
-        <TableContainer>
-          <Table>
-            <TableBody>
-              <TableRow>
-                <FoodItem foodItem={foodItem} setCartList={setCartList}/>
-              </TableRow>
-            </TableBody>
-          </Table>
+                  <FoodItem foodItem={foodItem} setCartList={setCartList}/>
 
-        </TableContainer>
-        ))
-      :null}
-    </div>
-    </div>
+          ))
+        :null}
+      </Container>
+    </Container>
   )
 
 }
