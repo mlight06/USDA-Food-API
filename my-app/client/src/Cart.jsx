@@ -1,5 +1,10 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+import { TableContainer, Button } from "@mui/material";
 
 export default function Cart(props) {
   const {cartList} = props;
@@ -39,11 +44,17 @@ export default function Cart(props) {
       <div>
       {cartList.length > 0 ? cartList.map((item) =>
       (
-        <div>
-          <div>Item: {item.description}</div>
-          <div>Calories: {item.calories}</div>
-          <button value={item.description} onClick={e => removeFromCart(e)}>X</button>
-        </div>
+        <TableContainer sx={{ maxHeight: 200 }}>
+          <Table>
+            <TableBody>
+              <TableRow>
+                <TableCell>Item: {item.description}</TableCell>
+                <TableCell>Calories: {item.calories}</TableCell>
+                <Button value={item.description} onClick={e => removeFromCart(e)}>X</Button>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
 
 
       )
@@ -51,10 +62,10 @@ export default function Cart(props) {
         : <div>Nothing in cart</div>
       }
       </div>
-      <div>{showCalories ?  <div>Total Calories of Cart: {totalCalories}</div>
+      <div>{showCalories ?  <div>Total calories of cart: {totalCalories}</div>
       : null}
       </div>
-      <button onClick={calculateCalories}>Calculate total calories</button>
+      <Button onClick={calculateCalories}>Calculate total calories</Button>
     </div>
   )
 }

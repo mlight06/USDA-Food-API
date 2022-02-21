@@ -1,6 +1,7 @@
 import React, {useState, useEffect, forceUpdate} from "react";
 import axios from "axios";
 import { API_KEY } from "./config";
+import { TableBody, TableRow, Table, TableCell, Button } from "@mui/material";
 
 export default function FoodItem(props) {
   const [additionalDetails, setAdditionalDetails] = useState(false);
@@ -52,19 +53,45 @@ export default function FoodItem(props) {
           <div onClick={showAdditionalDetails}>{description}</div>
           <div>Brand: {foodItem.brandOwner}</div>
           <div>Additional descriptions: {foodItem.additionalDescriptions? foodItem.additionalDescriptions : 'None'}</div>
-
-          <button onClick={addToCart}>Add to cart</button>
           <div>{additionalDetails ?
                 fetchingData ?
-            <div>
-             <div>Calories: {calories}</div>
-             <div>Protein: {protein}</div>
-             <div>Carbohydrates: {carbohydrate}</div>
-             <div>Fats: {fat}</div>
-             <div>Sugars: {sugar}</div>
-            </div>
+            <Table>
+              <TableBody>
+                <TableRow>
+                  <TableCell>
+
+             <div> Calories: {calories} </div>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>
+              <div>Protein: {protein}</div>
+
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>
+
+              <div>Carbohydrates: {carbohydrate}</div>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>
+
+              <div>Fats: {fat}</div>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>
+              <div>Sugars: {sugar}</div>
+
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
             : <div>Please wait, fetching data</div>
           : null}
+           <Button onClick={addToCart}>Add to cart</Button>
           </div>
         </div>
 
