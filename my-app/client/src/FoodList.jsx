@@ -3,6 +3,7 @@ import axios from 'axios';
 import { API_KEY } from "./config";
 import FoodItem from "./FoodItem";
 import Cart from "./Cart";
+import Paginate from "./Paginate";
 import {Table, TableBody, TableRow, TableCell, TableContainer, Container} from "@mui/material";
 
 export default function FoodList(props) {
@@ -22,11 +23,15 @@ export default function FoodList(props) {
 
   console.log('displayedResults', displayedResults, 'first', indexOfFirstPage, 'last', indexOfLastPage, 'curr', currentPage, resultsPerPage)
 
+  function setPageNumber(pageNumber) {
+    setCurrentPage(pageNumber)
+  }
+
   useEffect(() => {
     axios.get(`https://api.nal.usda.gov/fdc/v1/foods/search?query=${searchItem}&pageSize=10&api_key=${API_KEY}`)
     .then(response => {
       setFoodList(response.data.foods);
-      console.log('displayedResults', displayedResults)
+      console.log('displayedResults', displayedResults, 'foodlist length', foodList.length)
     })
     .catch(err => console.error(err))
   },[searchItem])
@@ -41,6 +46,9 @@ export default function FoodList(props) {
 
           ))
         :null}
+      </Container>
+      <Container>
+          <Paginate totalResults={foodList.length} resultsPerPage={resultsPerPage} setPageNumber={setPageNumber} />
       </Container>
     </Container>
   )
