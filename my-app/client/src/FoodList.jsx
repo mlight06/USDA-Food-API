@@ -28,12 +28,18 @@ export default function FoodList(props) {
   }
 
   useEffect(() => {
-    axios.get(`https://api.nal.usda.gov/fdc/v1/foods/search?query=${searchItem}&pageSize=10&api_key=${API_KEY}`)
-    .then(response => {
-      setFoodList(response.data.foods);
-      console.log('displayedResults', displayedResults, 'foodlist length', foodList.length)
-    })
-    .catch(err => console.error(err))
+    // axios.get(`https://api.nal.usda.gov/fdc/v1/foods/search?query=${searchItem}&pageSize=100&api_key=${API_KEY}`)
+    // .then(response => {
+    //   setFoodList(response.data.foods);
+    //   console.log('displayedResults', displayedResults, 'foodlist length', foodList.length)
+    // })
+    // .catch(err => console.error(err))
+    const APIResults = async () =>  {
+      const results = await axios.get(`https://api.nal.usda.gov/fdc/v1/foods/search?query=${searchItem}&pageSize=100&api_key=${API_KEY}`);
+      console.log('APIREsults',  results.data.foods)
+      setFoodList(results.data.foods)
+    }
+    APIResults()
   },[searchItem])
 
   return (
