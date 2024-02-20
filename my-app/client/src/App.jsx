@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 import Search from './Search';
 import Login from './Login';
+import LikeButton from './LikeButtons';
 
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
         </div>
         : <Login setIsSubmitted={setIsSubmitted} />
       }
+      <LikeButton />
       <Search />
     </div>
   );
